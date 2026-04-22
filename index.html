@@ -1,0 +1,369 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PulseCare Telemedicine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="loading-screen" id="loading-screen">
+    <div class="loader-orb"></div>
+    <p>Preparing your care space...</p>
+  </div>
+
+  <div class="page-shell">
+    <header class="site-header glass-card">
+      <a href="#home" class="brand" data-nav-target="home">
+        <span class="brand-icon">+</span>
+        <span>
+          <strong>PulseCare</strong>
+          <small>Smart telemedicine platform</small>
+        </span>
+      </a>
+
+      <nav class="main-nav">
+        <button class="nav-link active" data-nav-target="home">Home</button>
+        <button class="nav-link" data-nav-target="doctors">Doctors</button>
+        <button class="nav-link" data-nav-target="contact">Contact</button>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="dark-mode-toggle" aria-label="Toggle dark mode">DM</button>
+        <label class="upload-btn" for="profile-upload">Profile Photo</label>
+        <input type="file" id="profile-upload" accept="image/*" hidden>
+        <div class="account-menu-group">
+          <button class="btn btn-secondary" id="open-auth-btn">Login / Signup</button>
+          <div class="menu-shell">
+            <button class="icon-btn more-menu-trigger" id="more-menu-btn" aria-label="Open workspace menu">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <div class="more-menu hidden" id="more-menu">
+              <button class="menu-item" data-panel-target="profile-card">Profile</button>
+              <button class="menu-item" data-panel-target="notifications-card">Notification</button>
+              <button class="menu-item" data-panel-target="live-chat-section">Live Chat</button>
+              <button class="menu-item" data-panel-target="upcoming-card">Upcoming Appointments</button>
+              <button class="menu-item" data-panel-target="past-card">Past Appointments</button>
+              <button class="menu-item" data-panel-target="records-card">Medical Records</button>
+              <button class="menu-item" data-menu-action="home">Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero-section view-section active" id="home-section" data-view="home">
+        <div class="hero-copy">
+          <span class="pill">Healthcare, reimagined online</span>
+          <h1>Professional telemedicine for patients and doctors in one calm digital clinic.</h1>
+          <div class="hero-actions">
+            <button class="btn btn-primary" id="hero-book-btn">Start Live Chat</button>
+            <button class="btn btn-secondary" data-nav-target="doctors">Meet Doctors</button>
+          </div>
+
+          <div class="hero-stats">
+            <article class="metric-card glass-card">
+              <strong>40+</strong>
+              <span>Specialists available</span>
+            </article>
+            <article class="metric-card glass-card">
+              <strong>8 min</strong>
+              <span>Average response time</span>
+            </article>
+            <article class="metric-card glass-card">
+              <strong>4.9/5</strong>
+              <span>Patient satisfaction</span>
+            </article>
+          </div>
+        </div>
+
+       <div class="consultation-preview">
+            <div class="preview-topline">
+              <span class="status-dot"></span>
+              <span>Consultation workspace ready</span>
+            </div>
+            <div class="preview-grid">
+              <article>
+                <span>Care Path</span>
+                <strong>Primary Care</strong>
+              </article>
+              <article>
+                <span>Next Slot</span>
+                <strong>Today, 4:30 PM</strong>
+              </article>
+              <article>
+                <span>Mode</span>
+                <strong>Live Chat</strong>
+              </article>
+              <article>
+                <span>Records</span>
+                <strong>Synced</strong>
+              </article>
+            </div>
+            <div class="workspace-bio">
+              <p>
+                Chat with care teams live, manage health records, explore doctor services, and get guided support in one calm digital clinic.
+              </p>
+            </div>
+        </div>
+      </section>
+
+      <section class="showcase-grid">
+        <article class="showcase-card glass-card">
+          <p class="section-kicker">Authentication</p>
+          <h3>Patient and doctor roles</h3>
+          <p>Create separate accounts, sign in securely in-app, and switch into the right dashboard experience with clean validation.</p>
+        </article>
+        <article class="showcase-card glass-card">
+          <p class="section-kicker">Doctor Access</p>
+          <h3>Find care by service</h3>
+          <p>Search by service, view matching doctors, and continue to booking support when you need more help.</p>
+        </article>
+        <article class="showcase-card glass-card">
+          <p class="section-kicker">Engagement</p>
+          <h3>Chat and records</h3>
+          <p>Keep all touchpoints in one polished product with live chat, notifications, and care records.</p>
+        </article>
+      </section>
+
+      <section class="doctors-section view-section" id="doctors-section" data-view="doctors">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Doctor Services</p>
+            <h2>Choose a service to see available doctors.</h2>
+          </div>
+          <div class="doctor-tools glass-card">
+            <select id="specialty-filter">
+              <option value="">Choose a service</option>
+            </select>
+          </div>
+        </div>
+        <div class="doctor-grid" id="doctor-grid"></div>
+      </section>
+
+      <section class="dashboard-section view-section hidden-panel" id="dashboard-section" data-view="dashboard">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Dashboard</p>
+            <h2 id="dashboard-title">Your telemedicine workspace.</h2>
+          </div>
+          <div class="dashboard-profile workspace-item workspace-hidden glass-card" id="dashboard-profile"></div>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="glass-card dashboard-card workspace-item workspace-hidden" id="profile-card">
+            <div class="card-header-row">
+              <div>
+                <h3>Profile</h3>
+                <p>Your photo and account details.</p>
+              </div>
+            </div>
+            <div id="profile-details" class="list-stack"></div>
+          </article>
+
+          <article class="glass-card dashboard-card workspace-item workspace-hidden" id="upcoming-card">
+            <div class="card-header-row">
+              <div>
+                <h3>Upcoming Appointments</h3>
+                <p>Confirmed sessions that are still ahead.</p>
+              </div>
+              <span class="badge">Live</span>
+            </div>
+            <div id="upcoming-appointments" class="list-stack"></div>
+          </article>
+
+          <article class="glass-card dashboard-card workspace-item workspace-hidden" id="past-card">
+            <div class="card-header-row">
+              <div>
+                <h3>Past Appointments</h3>
+                <p>Recent care sessions and saved consultation history.</p>
+              </div>
+              <span class="badge muted">Archive</span>
+            </div>
+            <div id="past-appointments" class="list-stack"></div>
+          </article>
+
+          <article class="glass-card dashboard-card workspace-item workspace-hidden" id="records-card">
+            <div class="card-header-row">
+              <div>
+                <h3>Medical Records</h3>
+                <p>Consultation notes and visit summaries.</p>
+              </div>
+            </div>
+            <form id="record-form" class="mini-form">
+              <input type="text" id="record-title" placeholder="Consultation title" required>
+              <textarea id="record-notes" placeholder="Add notes, prescriptions, or follow-up advice." required></textarea>
+              <button class="btn btn-secondary" type="submit">Save Record</button>
+            </form>
+            <div id="records-list" class="list-stack"></div>
+          </article>
+
+          <article class="glass-card dashboard-card workspace-item workspace-hidden" id="notifications-card">
+            <div class="card-header-row">
+              <div>
+                <h3>Notifications</h3>
+                <p>Upcoming appointments and message alerts.</p>
+              </div>
+            </div>
+            <div id="notifications-list" class="list-stack"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="communications-grid hidden-panel" id="live-chat-section">
+        <article class="glass-card chat-card">
+          <div class="card-header-row">
+            <div>
+              <p class="section-kicker">Live Chat</p>
+              <h3>Patient and doctor messages</h3>
+            </div>
+            <span class="badge">Online</span>
+          </div>
+          <div class="chat-window" id="chat-window"></div>
+          <form id="chat-form" class="chat-form">
+            <input type="text" id="chat-input" placeholder="Type a message for your care team" required>
+            <button class="btn btn-primary" type="submit">Send</button>
+          </form>
+        </article>
+      </section>
+
+      <section class="payment-contact-grid">
+        <article class="glass-card contact-card view-section" id="contact-section" data-view="contact">
+          <div class="card-header-row">
+            <div>
+              <p class="section-kicker">Contact</p>
+              <h3>Stay connected with PulseCare</h3>
+            </div>
+          </div>
+          <div class="contact-list">
+            <div>
+              <span>Support Email</span>
+              <strong>support@pulsecare.health</strong>
+            </div>
+            <div>
+              <span>Hotline</span>
+              <strong>+251 900 123 456</strong>
+            </div>
+            <div>
+              <span>Clinic Hours</span>
+              <strong>24/7 virtual triage</strong>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast-stack" id="toast-stack"></div>
+
+  <div class="modal hidden" id="auth-modal">
+    <div class="modal-backdrop" id="auth-backdrop"></div>
+    <div class="modal-panel glass-card">
+      <button class="modal-close" id="close-auth-btn">×</button>
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-auth-mode="login">Login</button>
+        <button class="auth-tab" data-auth-mode="signup">Signup</button>
+      </div>
+
+      <form id="auth-form" class="auth-form">
+        <div class="form-grid two-col" id="signup-extra-fields">
+          <div class="field hidden" data-signup-only>
+            <label for="auth-name">Full Name</label>
+            <input type="text" id="auth-name" placeholder="Your full name">
+          </div>
+          <div class="field hidden" data-signup-only>
+            <label for="auth-role">Role</label>
+            <select id="auth-role">
+              <option value="Patient">Patient</option>
+              <option value="Doctor">Doctor</option>
+            </select>
+          </div>
+          <div class="field hidden" data-signup-only>
+            <label for="auth-specialty">Specialty</label>
+            <input type="text" id="auth-specialty" placeholder="Doctor specialty or patient focus">
+          </div>
+        </div>
+
+        <div class="google-auth-shell">
+          <div class="google-auth-headline" id="google-auth-label">Continue with Google</div>
+          <div id="google-signin-container" class="google-signin-container"></div>
+        </div>
+        <div class="auth-divider" aria-hidden="true">
+          <span>or use email</span>
+        </div>
+
+        <div class="field">
+          <label for="auth-email">Email</label>
+          <input type="email" id="auth-email" placeholder="name@example.com" required>
+        </div>
+        <div class="field">
+          <label for="auth-password">Password</label>
+          <input type="password" id="auth-password" placeholder="Minimum 6 characters" required>
+        </div>
+        <button class="btn btn-primary" type="submit" id="auth-submit-btn">Login</button>
+        <p class="form-hint" id="auth-feedback">Use signup to create a patient or doctor account.</p>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="booking-modal">
+    <div class="modal-backdrop" id="booking-backdrop"></div>
+    <div class="modal-panel glass-card">
+      <button class="modal-close" id="close-booking-btn">×</button>
+      <div class="card-header-row">
+        <div>
+          <p class="section-kicker">Appointment</p>
+          <h3>Book this doctor</h3>
+        </div>
+      </div>
+
+      <form class="auth-form" id="appointment-form" novalidate>
+        <div class="form-grid two-col">
+          <div class="field">
+            <label for="appointment-doctor">Doctor</label>
+            <select id="appointment-doctor" required></select>
+          </div>
+          <div class="field">
+            <label for="appointment-date">Date</label>
+            <input type="date" id="appointment-date" required>
+          </div>
+          <div class="field">
+            <label for="appointment-time">Time</label>
+            <select id="appointment-time" required>
+              <option value="">Select a time</option>
+              <option>09:00 AM</option>
+              <option>10:30 AM</option>
+              <option>12:00 PM</option>
+              <option>02:00 PM</option>
+              <option>04:30 PM</option>
+              <option>06:00 PM</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="appointment-symptoms">Symptoms / concern</label>
+          <textarea id="appointment-symptoms" placeholder="Describe the medical issue, duration, and any urgent symptoms." required></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Submit</button>
+          <span class="form-hint" id="appointment-feedback">This information will be sent to the doctor dashboard.</span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+  
