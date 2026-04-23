@@ -1,4 +1,4 @@
-﻿const STORAGE_KEYS = {
+const STORAGE_KEYS = {
   theme: "pulsecare-theme",
   users: "pulsecare-users",
   currentUser: "pulsecare-current-user",
@@ -1056,3 +1056,5 @@ function init() {
 }
 
 init();
+
+
