@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   --bg: #eff8ff;
   --bg-soft: #f9fcff;
   --surface: rgba(255, 255, 255, 0.86);
@@ -1210,3 +1210,4 @@ body.dark-mode .loading-screen {
     right: 12px;
   }
 }
+
